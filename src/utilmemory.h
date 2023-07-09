@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_UTILMEMORY_H
-#define BITCOIN_UTILMEMORY_H
+#ifndef TRUSTCOIN_UTILMEMORY_H
+#define TRUSTCOIN_UTILMEMORY_H
 
 #include <memory>
 #include <utility>

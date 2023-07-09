@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+#
+#  trustcoind The trustcoin core server.
+#
+#
+# chkconfig: 345 80 20
+# description: trustcoind
+# processname: trustcoind
+#
+
+# Source function library.
+. /etc/init.d/functions
+
+# you can override defaults in /etc/sysconfig/trustcoind, see below
+if [ -f /etc/sysconfig/trustcoind ]; then
+        . /etc/sysconfig/trustcoind
+fi
+
+RETVAL=0
+
+prog=trustcoind
+# you can override the lockfile via TRUSTCOIND_LOCKFILE in /etc/sysconfig/trustcoind
+lockfile=${TRUSTCOIND_LOCKFILE-/var/lock/subsys/trustcoind}
+
+# trustcoind defaults to /usr/bin/trustcoind, override with TRUSTCOIND_BIN
+trustcoind=${TRUSTCOIND_BIN-/usr/bin/trustcoind}
+
+# trustcoind opts default to -disablewallet, override with TRUSTCOIND_OPTS
+trustcoind_opts=${TRUSTCOIND_OPTS--disablewallet}
+
+start() {
+    echo -n $"Starting $prog: "
+    daemon $DAEMONOPTS $trustcoind $trustcoind_opts
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && touch $lockfile
+    return $RETVAL
+}
+
+stop() {
+    echo -n $"Stopping $prog: "
+    killproc $prog
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && rm -f $lockfile
+    return $RETVAL
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    status)
+        status $prog
+        ;;
+    restart)
+        stop
+        start
+        ;;
+    *)
+        echo "Usage: service $prog {start|stop|status|restart}"
+        exit 1
+        ;;
+esac

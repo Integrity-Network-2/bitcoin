@@ -1,0 +1,33 @@
+# /etc/conf.d/trustcoind: config file for /etc/init.d/trustcoind
+
+# Config file location
+#TRUSTCOIND_CONFIGFILE="/etc/trustcoin/trustcoin.conf"
+
+# What directory to write pidfile to?  (created and owned by $TRUSTCOIND_USER)
+#TRUSTCOIND_PIDDIR="/var/run/trustcoind"
+
+# What filename to give the pidfile
+#TRUSTCOIND_PIDFILE="${TRUSTCOIND_PIDDIR}/trustcoind.pid"
+
+# Where to write trustcoind data (be mindful that the blockchain is large)
+#TRUSTCOIND_DATADIR="/var/lib/trustcoind"
+
+# User and group to own trustcoind process
+#TRUSTCOIND_USER="trustcoin"
+#TRUSTCOIND_GROUP="trustcoin"
+
+# Path to trustcoind executable
+#TRUSTCOIND_BIN="/usr/bin/trustcoind"
+
+# Nice value to run trustcoind under
+#TRUSTCOIND_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+#TRUSTCOIND_OPTS=""
+
+# The timeout in seconds OpenRC will wait for trustcoind to terminate
+# after a SIGTERM has been raised.
+# Note that this will be mapped as argument to start-stop-daemon's
+# '--retry' option, which means you can specify a retry schedule
+# here. For more information see man 8 start-stop-daemon.
+TRUSTCOIND_SIGTERM_TIMEOUT=60
